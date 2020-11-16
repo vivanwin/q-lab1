@@ -29,7 +29,7 @@ RUN cd ${HOME} && \
     for solution in $(find . -type f -name "*.sln"); do dotnet restore "$solution"; done && \
 # Pre-exec notebooks to improve first-use start time
 # (the katas that are less frequently used on Binder are excluded to improve overall Binder build time)
-    ./scripts/prebuild-kata.sh "lab 1" && \
+    ./scripts/prebuild-kata.sh lab1 && \
    
 # To improve performance when loading packages at IQ# kernel initialization time,
 # we remove all online sources for NuGet such that IQ# Package Loading and NuGet dependency
