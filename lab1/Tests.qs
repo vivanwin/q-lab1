@@ -7,7 +7,7 @@
 // The tasks themselves can be found in Tasks.qs file.
 //////////////////////////////////////////////////////////////////////
 
-namespace Quantum.Kata.BasicGates {
+namespace Quantum.Kata.lab1 {
     
     open Microsoft.Quantum.Arrays;
     open Microsoft.Quantum.Intrinsic;

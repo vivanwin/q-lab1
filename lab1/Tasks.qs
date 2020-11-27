@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
-namespace Quantum.Kata.BasicGates {
+namespace Quantum.Kata.lab1 {
     open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Math;
 

@@ -3,7 +3,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PlatformTarget>x64</PlatformTarget>
     <IsPackable>false</IsPackable>
-    <RootNamespace>Quantum.Kata.BasicGates</RootNamespace>
+    <RootNamespace>Quantum.Kata.lab1</RootNamespace>
     <IQSharpLoadAutomatically>true</IQSharpLoadAutomatically>
   </PropertyGroup>
 

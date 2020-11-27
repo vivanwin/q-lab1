@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicGates", "BasicGates.csproj", "{4BAAB76A-ABFA-4F5C-9E5B-788BB3E8647E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab1", "lab1.csproj", "{4BAAB76A-ABFA-4F5C-9E5B-788BB3E8647E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

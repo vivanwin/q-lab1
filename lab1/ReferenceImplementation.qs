@@ -8,7 +8,7 @@
 // but feel free to look up the solution if you get stuck.
 //////////////////////////////////////////////////////////////////////
 
-namespace Quantum.Kata.BasicGates {
+namespace Quantum.Kata.lab1 {
     open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Math;
 
