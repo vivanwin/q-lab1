@@ -118,7 +118,7 @@ namespace Quantum.Kata.lab1 {
     
 
     //////////////////////////////////////////////////////////////////
-    // Part III. Random numbers
+    // Part II. Random numbers
     //////////////////////////////////////////////////////////////////
 
      operation CheckFlatDistribution (f : (Int => Int), numBits : Int, lowRange : Double, highRange : Double, nRuns : Int, minimumCopiesGenerated : Int) : Unit {
@@ -218,4 +218,51 @@ namespace Quantum.Kata.lab1 {
         CheckFlatDistribution(RandomNBits, 10, 461.0, 563.0, 1000, 0);
     }
 
+    //////////////////////////////////////////////////////////////////
+    // Part III. Deutsch–Jozsa Algorithm 
+    //////////////////////////////////////////////////////////////////
+
+    // Exercise 1.
+    @Test("QuantumSimulator")
+    operation T1_QuantumOracle () : Unit {
+        for (N in 1..5) {
+            AssertOperationsEqualReferenced(N, PhaseOracle_MostSignificantBit, PhaseOracle_MostSignificantBit_Reference);
+        }
+    }
+
+    // Exercise 2.
+    function ConstantOrBalanced (value : Bool) : String {
+        return (value ? "constant" | "balanced");
+    }
+
+    operation CheckQuantumAlgorithm (N : Int, oracle : (Qubit[] => Unit), expected : Bool, functionName : String) : Unit {
+        Message($"Testing {functionName}...");
+
+        let actual = DeutschJozsaAlgorithm(N, oracle);
+        
+        // check that the return value is correct
+        if (actual != expected) {
+            let actualStr = ConstantOrBalanced(actual);
+            let expectedStr = ConstantOrBalanced(expected);
+            fail $"    identified as {actualStr} but it is {expectedStr}.";
+        }
+
+        let nu = GetOracleCallsCount(oracle);
+        if (nu > 1) {
+            fail $"    took {nu} oracle calls to decide; you are only allowed to call the oracle once";
+        }
+
+        Message("    correct!");
+    }
+
+    @Test("Microsoft.Quantum.Katas.CounterSimulator")
+    operation T2_QuantumAlgorithm () : Unit {
+        ResetOracleCallsCount();
+        
+        CheckQuantumAlgorithm(4, PhaseOracle_Zero_Reference, true, "f(x) = 0");
+        CheckQuantumAlgorithm(4, PhaseOracle_One_Reference, true, "f(x) = 1");
+        CheckQuantumAlgorithm(4, PhaseOracle_Xmod2_Reference, false, "f(x) = x mod 2");
+        CheckQuantumAlgorithm(4, PhaseOracle_OddNumberOfOnes_Reference, false, "f(x) = (1 if x has odd number of 1s, and 0 otherwise)");
+    }
+    
 }

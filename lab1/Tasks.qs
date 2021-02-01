@@ -83,7 +83,7 @@ namespace Quantum.Kata.lab1 {
 
     
     //////////////////////////////////////////////////////////////////
-    // Part III. Random numbers
+    // Part II. Random numbers
     //////////////////////////////////////////////////////////////////
 
     // Exercise 1.
@@ -110,5 +110,19 @@ namespace Quantum.Kata.lab1 {
     operation RandomNBits (N: Int) : Int {
         // ...
         return -1;
+    }
+
+
+    //////////////////////////////////////////////////////////////////
+    // Part II. Random numbers
+    //////////////////////////////////////////////////////////////////
+
+    operation PhaseOracle_MostSignificantBit (x : Qubit[]) : Unit {
+        // ...
+    }
+
+    operation DeutschJozsaAlgorithm (N : Int, oracle : (Qubit[] => Unit)) : Bool {
+        // ...
+        return false;
     }
 }

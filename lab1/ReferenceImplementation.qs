@@ -11,6 +11,8 @@
 namespace Quantum.Kata.lab1 {
     open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Math;
+    open Microsoft.Quantum.Canon;
+    open Microsoft.Quantum.Math;
 
 
     //////////////////////////////////////////////////////////////////
@@ -56,7 +58,7 @@ namespace Quantum.Kata.lab1 {
 
 
     //////////////////////////////////////////////////////////////////
-    // Part III. Random numbers
+    // Part II. Random numbers
     //////////////////////////////////////////////////////////////////
 
     // Exercise 1.
@@ -81,4 +83,77 @@ namespace Quantum.Kata.lab1 {
         return result;
     }
 
+    //////////////////////////////////////////////////////////////////
+    // Part III. Deutsch–Jozsa Algorithm 
+    //////////////////////////////////////////////////////////////////
+
+    // Exercise 1.
+    operation PhaseOracle_MostSignificantBit_Reference (x : Qubit[]) : Unit is Adj {
+        Z(x[0]);
+    }
+
+    // Exercise 2.
+    operation PhaseOracle_Zero (x : Qubit[]) : Unit {
+    // Do nothing...
+    }
+
+    operation PhaseOracle_One (x : Qubit[]) : Unit {
+        // Apply a global phase of -1
+        R(PauliI, 2.0 * PI(), x[0]);
+    }
+
+    operation PhaseOracle_Xmod2 (x : Qubit[]) : Unit {
+        // Length(x) gives you the length of the array.
+        // Array elements are indexed 0 through Length(x)-1, inclusive.
+        Z(x[Length(x) - 1]);
+    }
+
+    operation PhaseOracle_OddNumberOfOnes (x : Qubit[]) : Unit {
+        ApplyToEach(Z, x);
+    }
+
+    // Function 1. f(x) = 0
+    operation PhaseOracle_Zero_Reference (x : Qubit[]) : Unit is Adj {
+        // Since f(x) = 0 for all values of x, Uf|y⟩ = |y⟩.
+        // This means that the operation doesn't need to do any transformation to the inputs.
+        // Build the project and run the tests to see that T01_Oracle_Zero test passes.
+    }
+
+
+    // Function 2. f(x) = 1
+    operation PhaseOracle_One_Reference (x : Qubit[]) : Unit is Adj {
+        // Since f(x) = 1 for all values of x, Uf|y⟩ = -|y⟩.
+        // This means that the operation needs to add a global phase of -1.
+        R(PauliI, 2.0 * PI(), x[0]);
+    }
+
+
+    // Function 3. f(x) = x mod 2
+    operation PhaseOracle_Xmod2_Reference (x : Qubit[]) : Unit is Adj {
+        // Length(x) gives you the length of the array.
+        // Array elements are indexed 0 through Length(x)-1, inclusive.
+        Z(x[Length(x) - 1]);
+    }
+
+
+    // Function 4. f(x) = 1 if x has odd number of 1s, and 0 otherwise
+    operation PhaseOracle_OddNumberOfOnes_Reference (x : Qubit[]) : Unit is Adj {
+        ApplyToEachA(Z, x);
+    }
+
+
+    operation DeutschJozsaAlgorithm_Reference (N : Int, oracle : (Qubit[] => Unit)) : Bool {
+        mutable isConstantFunction = true;
+        using (x = Qubit[N]) {
+            ApplyToEach(H, x);
+            oracle(x);
+            ApplyToEach(H, x);
+            for (q in x) {
+                if (M(q) == One) {
+                    set isConstantFunction = false;
+                }
+            }
+        }
+        return isConstantFunction;
+    }
 }
